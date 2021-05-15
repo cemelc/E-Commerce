@@ -3,9 +3,10 @@ import { Grid } from '@material-ui/core';
 
 import Product from './Product/Product'
 
+
 const products = [
-    {id: 1, name: 'Shoes', description: 'Running Shoes.', price:'€50', image:'https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-pocophone-f1-2.jpg'},
-    {id: 1, name: 'Pocophone', description: 'Xiaomi PocoPhone.', price:'€300', image:'https://fdn2.gsmarena.com/vv/pics/xiaomi/xiaomi-pocophone-f1-2.jpg'},
+    {id: 1, name: 'Shoes', description: 'Running Shoes.', price:'€50', image: 'https://media.gettyimages.com/photos/someone-jumping-into-lake-tahoe-picture-id541993270?s=2048x2048'},
+    {id: 2, name: 'Pocophone', description: 'Xiaomi PocoPhone.', price:'€300', image: 'https://media.gettyimages.com/photos/someone-jumping-into-lake-tahoe-picture-id541993270?s=2048x2048'},
 
 ]
 
@@ -20,10 +21,7 @@ const Products = () => {
             }
         </Grid>
     </main>
-    )
-
-
- 
+    ) 
 }
 
 export default Products;
