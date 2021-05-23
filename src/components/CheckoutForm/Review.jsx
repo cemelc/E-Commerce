@@ -5,7 +5,7 @@ const Review = ({ checkoutToken, totaltax }) => {
     
     var total = parseFloat(checkoutToken.live.subtotal.formatted);
     var totaltax = (0.21 * total) / (1 + 0.21);
-    totaltax= Math.round(totaltax * 100) / 100;
+    totaltax = Math.round(totaltax * 100) / 100;
     var totalShip= total + totaltax+parseFloat(checkoutToken.live.shipping.available_options[0].price.formatted);
     totalShip = Math.round(totalShip * 100) / 100;
     return (
@@ -27,7 +27,7 @@ const Review = ({ checkoutToken, totaltax }) => {
                     <ListItem style={{ padding: '5px 0' }}>
                         <ListItemText primary="Tax"/>
                         <Typography variant="subtitle2" style={{ fontWeight: 700 }} value={""}> 
-                            {'€'+totaltax}
+                            {'€'+ totaltax}
                         </Typography>                            
                     </ListItem>
                     <ListItem style={{ padding: '10px 0' }}>
