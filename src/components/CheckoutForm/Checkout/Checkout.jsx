@@ -26,7 +26,7 @@ const Checkout = ({ cart, order, error, onCaptureCheckout }) => {
            
                 setCheckoutToken(token);
               } catch (error){
-                  history.pushState('/');
+                  history.push('/');
               } 
             }
             generateToken();
