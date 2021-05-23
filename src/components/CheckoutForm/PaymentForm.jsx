@@ -8,7 +8,7 @@ import Review from './Review';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const PaymentForm = ({ checkoutToken, backStep , onCaptureCheckout, nextStep, shippingData, timeout }) => {
-        const [ dude, setdude] = useState('');
+        
         const handleSubmit = async (event, elements, stripe)  => {
         event.preventDefault();
 
@@ -18,17 +18,7 @@ const PaymentForm = ({ checkoutToken, backStep , onCaptureCheckout, nextStep, sh
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({ type: 'card', card: cardElement });
 
-        for (const item of checkoutToken.live.line_items){
-            const mydios= item.id;
-            
-           const  mydiokos=   {quantity: item.quantity,selected_options: item.selected_options};
-            
-                  
-            console.log(mydiokos);
-                          
-        };
-
-        //console.log(checkoutToken.live.line_items);        
+        var totalShip= parseFloat(checkoutToken.live.subtotal.formatted)+parseFloat(checkoutToken.live.shipping.available_options[0].price.formatted);
         if (error){
             console.log(error);
         }else {
@@ -42,16 +32,19 @@ const PaymentForm = ({ checkoutToken, backStep , onCaptureCheckout, nextStep, sh
                 stripe: {
                   payment_method_id: paymentMethod.id
                 }
-              }
+              },
+              pay_what_you_want: totalShip
             };
-
+                
                 onCaptureCheckout(checkoutToken.id, orderData);
 
                 timeout();
                 nextStep();
             }            
     };
-    
+
+    var totalShip= parseFloat(checkoutToken.live.subtotal.formatted)+parseFloat(checkoutToken.live.shipping.available_options[0].price.formatted);
+    console.log(totalShip);
     return (
         <>
             <Review checkoutToken={checkoutToken}/>
@@ -66,7 +59,7 @@ const PaymentForm = ({ checkoutToken, backStep , onCaptureCheckout, nextStep, sh
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <Button variant="outlined" onClick={backStep}>Back</Button>
                                 <Button type="submit" variant="contained" disabled={!stripe} color="primary">
-                                Pay {checkoutToken.live.subtotal.formatted_with_symbol}
+                                Pay {'€'+totalShip}
                             </Button>                          
                             </div>
                         </form>
