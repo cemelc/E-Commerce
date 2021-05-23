@@ -1,6 +1,6 @@
 import React, { useState, useEffect }  from 'react';
-import {Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button} from '@material-ui/core';
-
+import {Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button, CssBaseline} from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 import useStyles from './styles';
 import  AddressForm  from '../AddressForm';
@@ -38,15 +38,36 @@ const Checkout = ({ cart, order, error, onCaptureCheckout }) => {
             nextStep();
         }
 
-        const Confirmation = () => {
-            return(
+        let Confirmation = () => order.customer ? (        
                   <>
+                      <CssBaseline />
                       <div>
-                          Confirmation
+                         <Typography variant="h5"> Thank you for your purchase, {order.customer.firstname}, {order.customer.lastname}</Typography>
+                         <Divider className={classes.divider} />
+                         <Typography variant="subtitle2">Order Ref: {order.customer_reference}</Typography>
                       </div>
+                      <br />
+                      <Button component={Link} to="/" variant="outlined" type="button">Back to Home</Button>
                   </>
-              )
-          };
+              
+         ) : (
+             <div className={classes.spinner}>
+                <CircularProgress />
+             </div>
+         );
+         
+
+         if (error){
+            <>
+                <Typography variant="h5">Error: {error}</Typography>
+                <br />
+                <Button component={Link} to="/" variant="outlined" type="button">Back to Home</Button>
+            </>
+
+         }
+         
+
+         
 
           //console.log(shippingData);
     const Form = () =>  (activeStep === 0 
@@ -55,6 +76,7 @@ const Checkout = ({ cart, order, error, onCaptureCheckout }) => {
     
     return(
         <>
+            <CssBaseline />
             <div className={classes.toolbar} />
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
@@ -71,6 +93,6 @@ const Checkout = ({ cart, order, error, onCaptureCheckout }) => {
             </main>            
         </>
     )
-}
+};
 
 export default Checkout;

@@ -40,22 +40,23 @@ const App = () => {
         setCart(cart);
     }
 
-    const refreshCart = async( ) => {
+    const refreshCart = async () => {
         const newCart = await commerce.cart.refresh();
-
+    
         setCart(newCart);
-    }
+      };
 
-    const handleCaptureCheckout = async (checkoutTokenId, newOrder) =>{
-        try{
-            const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
-
-            setOrder(incomingOrder);
-            refreshCart();
-        }catch(error){
-            setErrorMessage(error.data.error.message);
+      const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+        try {
+          const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
+          
+          setOrder(incomingOrder);
+    
+          refreshCart();
+        } catch (error) {            
+          setErrorMessage(error.data.error.message);
         }
-    }
+      };
 
 
     const fetchCart = async() => {

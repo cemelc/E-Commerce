@@ -12,12 +12,13 @@ const FormInput = ({ name, label}) => {
                         <TextField {...field}
                             fullWidth                            
                             label={label}
-                                                                                                                                                                       
+                            defaultValue=""                                                                                                                                           
                         />
                     )}                   
                     control={control}
                     rules={{ required: true }}                    
-                    name={name}                    
+                    name={name} 
+                                     
                 />
             </Grid>           
     );
