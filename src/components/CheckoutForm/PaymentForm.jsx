@@ -17,8 +17,12 @@ const PaymentForm = ({ checkoutToken, backStep , onCaptureCheckout, nextStep, sh
         const cardElement = elements.getElement(CardElement);
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({ type: 'card', card: cardElement });
-
-        var totalShip= parseFloat(checkoutToken.live.subtotal.formatted)+parseFloat(checkoutToken.live.shipping.available_options[0].price.formatted);
+        
+        var total = parseFloat(checkoutToken.live.subtotal.formatted);
+        var totaltax = (0.21 * total) / (1 + 0.21);
+        totaltax= Math.round(totaltax * 100) / 100;
+        var totalShip= total + totaltax+parseFloat(checkoutToken.live.shipping.available_options[0].price.formatted);
+         totalShip = Math.round(totalShip * 100) / 100;
         if (error){
             console.log(error);
         }else {
@@ -43,8 +47,16 @@ const PaymentForm = ({ checkoutToken, backStep , onCaptureCheckout, nextStep, sh
             }            
     };
 
-    var totalShip= parseFloat(checkoutToken.live.subtotal.formatted)+parseFloat(checkoutToken.live.shipping.available_options[0].price.formatted);
-    console.log(totalShip);
+    console.log(checkoutToken);
+    var total = parseFloat(checkoutToken.live.subtotal.formatted);
+    var totaltax = (0.21 * total) / (1 + 0.21);
+    totaltax= Math.round(totaltax * 100) / 100;
+    var totalShip= total + totaltax+parseFloat(checkoutToken.live.shipping.available_options[0].price.formatted);
+     totalShip = Math.round(totalShip * 100) / 100;
+   
+    
+     console.log(totaltax);
+
     return (
         <>
             <Review checkoutToken={checkoutToken}/>

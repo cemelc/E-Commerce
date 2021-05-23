@@ -15,6 +15,7 @@ const Checkout = ({ cart, order, error, onCaptureCheckout }) => {
     const [checkoutToken, setCheckoutToken] = useState(null);
     const [ shippingData, setShippingData] = useState({});
     const [ isfinished, setIsFinished]= useState(false);
+    const [ taxzone, setTaxZone]= useState('');
     const classes = useStyles();
     const history = useHistory();
 
