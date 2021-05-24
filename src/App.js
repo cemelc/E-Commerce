@@ -58,7 +58,6 @@ const App = () => {
         }
       };
 
-
     const fetchCart = async() => {
         setCart(await commerce.cart.retrieve())
     }
@@ -67,9 +66,6 @@ const App = () => {
         fetchProducts();
         fetchCart();
       }, []);
-
-
-
     
     return (
         <Router>
